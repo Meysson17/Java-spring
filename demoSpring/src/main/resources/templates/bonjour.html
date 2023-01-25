@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>debut Spring</title>
 </head>
 <body>
-<h1>Bonjour !!!</h1>
+<h1> Bonjour <span th:text="${personne.prenom}">Joe</span></h1>
 
 <a href="/hello" >Dire hello en get</a>
 <form method="post" action="/">

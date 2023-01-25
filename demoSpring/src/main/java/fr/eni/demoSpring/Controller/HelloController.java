@@ -1,11 +1,9 @@
 package fr.eni.demoSpring.Controller;
 
-import fr.eni.demoSpring.Service.HelloService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import fr.eni.demoSpring.bo.Personne;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HelloController {
@@ -39,14 +37,28 @@ public class HelloController {
     /*
     route vers bonjours
      */
-    @RequestMapping(path = "/bonjour", method = RequestMethod.POST)
-    public String bonjour() {
-        System.out.println("passe par la");
+    @PostMapping("/bonjour")
+   // @RequestMapping(path = "/bonjour", method = RequestMethod.POST)
+    public String bonjour(@RequestParam String prenom, Model modele) {
+        //System.out.println("prenom recu = " + prenom);
+        Personne pers = new Personne(prenom);
+        modele.addAttribute("personne", pers);
+
+        return "redirect:/bonjour?prenom"+pers.getPrenom();
+    }
+
+
+   // @RequestMapping(path = "/bonjour", method = RequestMethod.GET)
+    @GetMapping("/bonjour")
+    public String bonjourGet(@RequestParam (required = false, defaultValue = "world") String prenom, Model modele) {
+        System.out.println("prenom recu = " + prenom);
+        Personne pers = new Personne(prenom);
+        modele.addAttribute("personne", pers);
         return "bonjour";
     }
-    @RequestMapping(path = "/bonjour", method = RequestMethod.GET)
-    public String bonjourGet() {
-        System.out.println("passe par la");
+    @GetMapping("/bonjour/{id}/{prenom}")
+    public String getBonjourPath(@PathVariable int id, @PathVariable String prenom) {
+        System.out.println("id recu = " + id + ", prenom recu = " + prenom);
         return "bonjour";
     }
 }

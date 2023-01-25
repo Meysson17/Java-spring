@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="chifoumi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/chifoumi.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
